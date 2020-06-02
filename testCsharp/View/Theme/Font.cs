@@ -11,7 +11,7 @@ namespace testCsharp.View.Theme
         public static FontFamily FontFamily = new FontFamily("MS Reference Sans Serif, Global Sans Serif, Arial");
 
         // font sizes
-        public static double Headline = 40;
+        public static double Headline = 45;
         public static double SubHeader = 30;
         public static double Title = 24;
         public static double SubTitle = 20;

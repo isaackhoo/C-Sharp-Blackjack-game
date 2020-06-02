@@ -6,6 +6,9 @@ namespace testCsharp.Model
 {
     public static class Settings
     {
-        public static int blackjackTarget = 21;
+        // game settings
+        public static int NumberOfDecks = 1;
+        public static int BlackJackTarget = 21;
+        
     }
 }

@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using testCsharp.Model;
 
 namespace testCsharp.View
 {
@@ -31,6 +32,11 @@ namespace testCsharp.View
             TitleView titleView = new TitleView();
             // navigate to game view page
             nav.Navigate(titleView);
+        }
+
+        private void onTestButtonPress(object sender, RoutedEventArgs e)
+        {
+            GameState.endGame();
         }
     }
 }

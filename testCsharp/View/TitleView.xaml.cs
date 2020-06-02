@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using testCsharp.Controller;
 using testCsharp.Model.Decks;
 
 namespace testCsharp.View
@@ -19,6 +20,8 @@ namespace testCsharp.View
     /// </summary>
     public partial class TitleView : Page
     {
+        TitleViewController titleViewController = new TitleViewController();
+
         public TitleView()
         {
             InitializeComponent();
@@ -44,7 +47,16 @@ namespace testCsharp.View
 
         private void onStartSinglePlayer(object sender, RoutedEventArgs e)
         {
+            // get controller to start a single player game
+            titleViewController.startSinglePlayerGame();
 
+            // navigate user to game page
+            // get navigation services
+            NavigationService nav = NavigationService.GetNavigationService(this);
+            // create game view page
+            GameView gameView = new GameView();
+            // navigate to game view page
+            nav.Navigate(gameView);
         }
 
         private void GoToSettingsPage(object sender, RoutedEventArgs e)

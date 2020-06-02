@@ -7,8 +7,8 @@ namespace testCsharp.Model
 {
     public class PlayerHand
     {
-        private List<Card> hand;
-        private int totalPoints;
+        public List<Card> hand { get; private set; }
+        public int totalPoints { get; private set; }
 
         // constructor
         public PlayerHand()
@@ -48,7 +48,7 @@ namespace testCsharp.Model
             // determine if aces can take a value of 11 instead
             for (int i = 0; i < NumberOfAces; i++)
             {
-                if (Settings.blackjackTarget - totalPoints >= acePointDifference)
+                if (Settings.BlackJackTarget - totalPoints >= acePointDifference)
                     totalPoints += acePointDifference;
             }
         }

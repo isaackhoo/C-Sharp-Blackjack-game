@@ -8,6 +8,7 @@ namespace testCsharp.Model.Decks
 {
     public class Card
     {
+        // card variables
         public Guid _id { get; private set; } 
         public string Display { get; private set; }
         public int Value { get; private set; }
@@ -44,10 +45,11 @@ namespace testCsharp.Model.Decks
             // Color of suit
             if (cardSuit["color"] == null)
                 throw new ArgumentException("Card color should not be null");
-            Color = (string)cardSuit["color"];                 
+            Color = (string)cardSuit["color"];
+
         }
 
-        // methods
+        // getters
         public string getId()
         {
             // combines card display and suit for easy comparison of cards

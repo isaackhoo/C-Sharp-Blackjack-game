@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using testCsharp.Model;
 
 namespace testCsharp.View
 {
@@ -26,6 +27,11 @@ namespace testCsharp.View
             ShowsNavigationUI = false;
         }
 
+        private void OnPageLoaded(object sender, RoutedEventArgs e)
+        {
+            gameLabel.Content = GameState.GameStatus;
+        }
+
         private void GoToTitleView(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("Entered game view button click - go to title view");
@@ -36,5 +42,7 @@ namespace testCsharp.View
             // navigate to game view page
             nav.Navigate(titleView);
         }
+
+        
     }
 }
