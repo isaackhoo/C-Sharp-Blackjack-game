@@ -31,7 +31,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Shell;
 using testCsharp;
-using testCsharp.View;
+
 
 namespace testCsharp {
     
@@ -47,9 +47,10 @@ namespace testCsharp {
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.8.1.0")]
         public void InitializeComponent() {
+            
             #line 5 "..\..\..\App.xaml"
             this.StartupUri = new System.Uri("View/TitleView.xaml", System.UriKind.Relative);
-
+            
             #line default
             #line hidden
         }

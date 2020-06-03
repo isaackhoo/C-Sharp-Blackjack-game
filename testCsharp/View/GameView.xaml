@@ -5,10 +5,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:testCsharp.View"
+    xmlns:model="clr-namespace:testCsharp.Model"
     xmlns:theme="clr-namespace:testCsharp.View.Theme"
     mc:Ignorable="d"
-    d:DesignHeight="720"
-    d:DesignWidth="800"
+    d:DesignHeight="1080"
+    d:DesignWidth="1920"
     Title="GameView">
 
     <Grid
@@ -61,9 +62,9 @@
                 <Setter
                     Property="FontSize"
                     Value="{x:Static theme:Font.Body}" />
-                <Setter 
+                <Setter
                     Property="Foreground"
-                    Value="{x:Static theme:Brushes.Secondary}"/>
+                    Value="{x:Static theme:Brushes.Secondary}" />
             </Style>
         </Grid.Resources>
 
@@ -78,8 +79,158 @@
             FontSize="{x:Static theme:Font.Caption}"
             Click="onExitButtonPress" />
 
-        <!--Dealer Hand-->
-        <ItemsControl
+        <!--underlapped covered Dealer Hand-->
+        <StackPanel
+            Grid.Column="1"
+            Grid.Row="0"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            <ItemsControl
+                x:Name="UnderLayCoveredDealerHandList">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            BorderThickness="1"
+                            BorderBrush="{x:Static theme:Brushes.CardBorder}"
+                            Background="{x:Static theme:Brushes.CardWhite}"
+                            CornerRadius="5"
+                            Width="150"
+                            Height="210"
+                            Padding="5"
+                            Margin="5,0">
+                            <Border
+                                BorderThickness="4"
+                                BorderBrush="{x:Static theme:Brushes.Primary}"
+                                CornerRadius="5"
+                                Padding="5">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition
+                                            Height="*" />
+                                        <RowDefinition
+                                            Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel
+                                        Grid.Row="0"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                        <TextBlock
+                                            Text="i"
+                                            Foreground="{x:Static theme:Brushes.Primary}"
+                                            FontSize="{x:Static theme:Font.Title}" />
+                                        <TextBlock
+                                            Text="llumina"
+                                            Foreground="{x:Static theme:Brushes.Secondary}"
+                                            FontSize="{x:Static theme:Font.Title}" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Row="1"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                        <TextBlock
+                                            Text="b"
+                                            Foreground="{x:Static theme:Brushes.Primary}"
+                                            FontSize="{x:Static theme:Font.Title}" />
+                                        <TextBlock
+                                            Text="lackjack"
+                                            Foreground="{x:Static theme:Brushes.Secondary}"
+                                            FontSize="{x:Static theme:Font.Title}" />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+        <!--overlapped visible Dealer Hand-->
+        <StackPanel
+            Grid.Column="1"
+            Grid.Row="0"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            <ItemsControl
+                x:Name="OverLayVisibleDealerHandList"
+                AlternationCount="9999">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter
+                            Property="Visibility"
+                            Value="Hidden" />
+                        <Style.Triggers>
+                            <Trigger
+                                Property="ItemsControl.AlternationIndex"
+                                Value="0">
+                                <Setter
+                                    Property="Visibility"
+                                    Value="Visible" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            BorderThickness="1"
+                            BorderBrush="{x:Static theme:Brushes.CardBorder}"
+                            Background="{x:Static theme:Brushes.CardWhite}"
+                            CornerRadius="5"
+                            Width="150"
+                            Height="210"
+                            Padding="5"
+                            Margin="5,0">
+                            <Border
+                                BorderThickness="4"
+                                BorderBrush="{x:Static theme:Brushes.Primary}"
+                                CornerRadius="5"
+                                Padding="5">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition
+                                            Height="*" />
+                                        <RowDefinition
+                                            Height="*" />
+                                        <RowDefinition
+                                            Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel
+                                        Grid.Row="1"
+                                        Orientation="Vertical">
+                                        <TextBlock
+                                            Text="{Binding Display}"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Foreground="{x:Static theme:Brushes.Secondary}"
+                                            FontSize="{x:Static theme:Font.Title}" />
+                                        <TextBlock
+                                            Text="{Binding Suit}"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Foreground="{x:Static theme:Brushes.Secondary}"
+                                            FontSize="{x:Static theme:Font.Title}" />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+        <!--<ItemsControl
             Grid.Column="1"
             Grid.Row="0"
             x:Name="DealerHandList"
@@ -116,9 +267,9 @@
                     </Border>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        </ItemsControl>-->
 
-        <!--Game Comments and Action Buttons-->
+        <!-- Decks and Game Controls-->
         <Grid
             Grid.Column="1"
             Grid.Row="1">
@@ -140,7 +291,7 @@
                 <RowDefinition
                     Height="*" />
             </Grid.RowDefinitions>
-            
+
             <!--Discard Deck Display-->
             <Grid
                 Grid.Column="0"
@@ -148,23 +299,56 @@
                 Grid.RowSpan="2"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
-                <StackPanel
-                    Orientation="Vertical">
+                <Border
+                    BorderThickness="1"
+                    BorderBrush="{x:Static theme:Brushes.CardBorder}"
+                    Background="{x:Static theme:Brushes.CardWhite}"
+                    CornerRadius="5"
+                    Width="150"
+                    Height="210"
+                    Padding="5">
                     <Border
-                        BorderThickness="1"
-                        BorderBrush="{x:Static theme:Brushes.Secondary}"
+                        BorderThickness="4"
+                        BorderBrush="{x:Static theme:Brushes.Primary}"
                         CornerRadius="5"
-                        Margin="0,5">
-                        <TextBlock
-                            Text="Discard deck img" />
+                        Padding="5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition
+                                    Height="*" />
+                                <RowDefinition
+                                    Height="*" />
+                                <RowDefinition
+                                    Height="*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                Grid.Row="0"
+                                Text="Discard"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="{x:Static theme:Brushes.TextBlack}"
+                                FontSize="{x:Static theme:Font.Title}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Name="DiscardDeckCountTextBlock"
+                                Text="{Binding Path=(model:GameState.DiscardDeckCount), Mode=TwoWay}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="{x:Static theme:Brushes.Secondary}"
+                                FontSize="{x:Static theme:Font.Headline}" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Text="Pile"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="{x:Static theme:Brushes.TextBlack}"
+                                FontSize="{x:Static theme:Font.Title}" />
+                        </Grid>
                     </Border>
-
-                    <TextBlock
-                        Text="Deck count" />
-                </StackPanel>
+                </Border>
             </Grid>
 
-            <!--Game Comments-->
+            <!--Game Controls-->
             <TextBlock
                 Grid.Row="1"
                 Grid.RowSpan="2"
@@ -175,7 +359,7 @@
                 Text="i"
                 Foreground="{x:Static theme:Brushes.Primary}"
                 FontSize="{x:Static theme:Font.Title}" />
-            
+
             <!--Game action buttons-->
             <Grid
                 Name="GameControlButtonGroup"
@@ -211,59 +395,151 @@
                 Grid.RowSpan="2"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
-                <StackPanel Orientation="Vertical">
+                <Border
+                    BorderThickness="1"
+                    BorderBrush="{x:Static theme:Brushes.CardBorder}"
+                    Background="{x:Static theme:Brushes.CardWhite}"
+                    CornerRadius="5"
+                    Width="150"
+                    Height="210"
+                    Padding="5">
                     <Border
-                        BorderThickness="1"
-                        BorderBrush="{x:Static theme:Brushes.Secondary}"
+                        BorderThickness="4"
+                        BorderBrush="{x:Static theme:Brushes.Primary}"
                         CornerRadius="5"
-                        Margin="0,5"
-                        >
-                        <TextBlock
-                            Text="Deck img" />
+                        Padding="5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition
+                                    Height="*" />
+                                <RowDefinition
+                                    Height="*" />
+                                <RowDefinition
+                                    Height="*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                Grid.Row="0"
+                                Text="Deck"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="{x:Static theme:Brushes.TextBlack}"
+                                FontSize="{x:Static theme:Font.Title}" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Name="ActiveDeckCountTextBlock"
+                                Text="{Binding Path=(model:GameState.ActiveDeckCount), Mode=TwoWay}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="{x:Static theme:Brushes.Secondary}"
+                                FontSize="{x:Static theme:Font.Headline}" />
+                        </Grid>
                     </Border>
-
-                    <TextBlock Text="Deck count"/>
-                </StackPanel>
+                </Border>
             </Grid>
         </Grid>
 
         <!--Player Hand-->
-        <ItemsControl
+        <Grid
             Grid.Column="1"
+            Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="*" />
+                <RowDefinition
+                    Height="4*" />
+            </Grid.RowDefinitions>
+            <!--Player score-->
+            <StackPanel
+                Grid.Row="0"
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <TextBlock
+                    Text="Your Hand's Score: "               
+                    DataContext="{Binding player}"
+                    Foreground="{x:Static theme:Brushes.Primary}"
+                    FontSize="{x:Static theme:Font.Title}" />
+                <TextBlock
+                    Name="PlayerHandScoreTextBlock"
+                    Text="{Binding Path=Hand.TotalPoints}"
+                    DataContext="{Binding player}"
+                    Foreground="{x:Static theme:Brushes.Primary}"
+                    FontSize="{x:Static theme:Font.Title}" />
+            </StackPanel>
+
+
+            <!--Player Hand-->
+            <StackPanel
+                Grid.Row="1"
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <ItemsControl
+                    x:Name="RevealedPlayerHandList">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                BorderThickness="1"
+                                BorderBrush="{x:Static theme:Brushes.CardBorder}"
+                                Background="{x:Static theme:Brushes.CardWhite}"
+                                CornerRadius="5"
+                                Width="150"
+                                Height="210"
+                                Padding="5"
+                                Margin="5,0">
+                                <Border
+                                    BorderThickness="4"
+                                    BorderBrush="{x:Static theme:Brushes.Primary}"
+                                    CornerRadius="5"
+                                    Padding="5">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition
+                                                Height="*" />
+                                            <RowDefinition
+                                                Height="*" />
+                                            <RowDefinition
+                                                Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <StackPanel
+                                            Grid.Row="1"
+                                            Orientation="Vertical">
+                                            <TextBlock
+                                                Text="{Binding Display}"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="{x:Static theme:Brushes.Secondary}"
+                                                FontSize="{x:Static theme:Font.Title}" />
+                                            <TextBlock
+                                                Text="{Binding Suit}"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="{x:Static theme:Brushes.Secondary}"
+                                                FontSize="{x:Static theme:Font.Title}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Grid>
+
+
+        <!--Player Hand Points-->
+        <TextBlock
+            Grid.Column="2"
             Grid.Row="2"
-            x:Name="PlayerHandList"
-            ItemsSource="{Binding testHand}"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border
-                        Width="100"
-                        Height="150"
-                        CornerRadius="5"
-                        BorderThickness="1"
-                        BorderBrush="{x:Static theme:Brushes.Primary}"
-                        Margin="5"
-                        Padding="10"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center">
-                        <StackPanel
-                            Orientation="Horizontal"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
-                            <TextBlock
-                                Text="{Binding Display}" />
-                            <TextBlock
-                                Text="{Binding Suit}" />
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+            VerticalAlignment="Center"
+            Text="{Binding Path=TotalPoints }"
+            DataContext="{Binding player}" />
+
     </Grid>
 </Page>

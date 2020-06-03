@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using testCsharp.Model.Decks.Components;
 using testCsharp.Model.Decks.Constants;
 
 namespace testCsharp.Model.Decks
 {
     public class ActiveDeck : IDeck
     {
-        private List<Card> Deck;
+        public ObservableCollection<Card> Deck { get; private set; }
 
         // constructor
-        public ActiveDeck ()
+        public ActiveDeck()
         {
-            Deck = new List<Card>();
+            Deck = new ObservableCollection<Card>();
         }
 
         // methods
@@ -23,7 +24,7 @@ namespace testCsharp.Model.Decks
         {
             try
             {
-                for (int i = 0; i <NumberOfDecks; i++)
+                for (int i = 0; i < NumberOfDecks; i++)
                 {
                     CardConstants.cardSuits.ForEach(suitDetails =>
                     {
@@ -32,32 +33,43 @@ namespace testCsharp.Model.Decks
                             Card card = new Card(cardDetails, suitDetails);
                             Deck.Add(card);
                         });
-                    });                                 
+                    });
                 }
             }
             catch (Exception e) { throw e; }
         }
+
+
         public Card drawCard()
         {
-            // if there are no cards left in the deck, return null
-            if (getCount() == 0)
-                return null;
-            // if there are still cards,
-            // randomly draw a card
+            Card drawnCard = null;
+            try
+            {
+                // if there are no cards left in the deck, return null
+                if (Deck.Count == 0)
+                    throw new InvalidOperationException("No cards left to draw");
 
-            // create a new random generator with unique seed
-            Random rnd = new Random(Guid.NewGuid().GetHashCode());
+                // if there are still cards,
+                // randomly draw a card
 
-            // randomly get an index to draw from
-            int randIndex = rnd.Next(0, getCount());
+                // create a new random generator with unique seed
+                Random rnd = new Random(Guid.NewGuid().GetHashCode());
 
-            // retrieve the card at random index 
-            Card drawnCard = Deck[randIndex];
+                // randomly get an index to draw from
+                int randIndex = rnd.Next(0, Deck.Count);
 
-            // remove card from deck
-            Deck.RemoveAt(randIndex);
+                // retrieve the card at random index 
+                drawnCard = Deck[randIndex];
 
-            // return drawnc ard
+                // remove card from deck
+                Deck.RemoveAt(randIndex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            // return drawn card
             return drawnCard;
         }
 

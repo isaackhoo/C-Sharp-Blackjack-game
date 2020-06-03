@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,8 +23,8 @@ namespace testCsharp.View
     /// </summary>
     public partial class GameView : Page
     {
-        ActiveDeck activeDeck;
-        ObservableCollection<Card> testHand;
+        Player player;      
+
         public GameView()
         {
             InitializeComponent();
@@ -38,20 +39,26 @@ namespace testCsharp.View
             GameTextFeedback.Text = "illumina blackjack";
             GameTextFeedback.Visibility = Visibility.Hidden;
 
+            // create a player object
+            player = new Player("player 1");
+
+            // add player to game state
+            GameState.addPlayer(player);
+
+            // bind hand from game state
+            OverLayVisibleDealerHandList.ItemsSource = GameState.TableDealer.Hand.HandWithoutFirstCard;
+            UnderLayCoveredDealerHandList.ItemsSource = GameState.TableDealer.Hand.HandWithoutFirstCard;
+            RevealedPlayerHandList.ItemsSource = player.Hand.HandWithoutFirstCard;
+
+            PlayerHandScoreTextBlock.DataContext = player;
+
             // test
-            activeDeck = new ActiveDeck();
-            activeDeck.createDeck();
-
-            // test hand
-            testHand = new ObservableCollection<Card>();
-
-            // bind to itemscontrol
-            PlayerHandList.ItemsSource = testHand;
-            DealerHandList.ItemsSource = testHand;
         }
 
         private void OnPageLoaded(object sender, RoutedEventArgs e)
-        {         
+        {
+            // start the game
+            GameState.startGame();
         }
 
         private void onExitButtonPress(object sender, RoutedEventArgs e)
@@ -66,12 +73,12 @@ namespace testCsharp.View
 
         private void OnHitButtonPress(object sender, RoutedEventArgs e)
         {
-            testHand.Add(activeDeck.drawCard());
+            GameState.hitForCurrentPlayer();
         }
 
         private void OnStayButtonPress(object sender, RoutedEventArgs e)
         {
-            testHand.Clear();
+            // GameState.endGame();
         }
     }
 }

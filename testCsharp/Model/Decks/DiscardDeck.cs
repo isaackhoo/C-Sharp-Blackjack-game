@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
-using testCsharp.Model.Decks.Components;
 
 namespace testCsharp.Model.Decks
 {
     public class DiscardDeck : IDeck
     {
-        private List<Card> Deck;
+        public ObservableCollection<Card> Deck { get; private set; }
+
+        // notification event
+        public event PropertyChangedEventHandler PropertyChanged;
 
         // constructor
         public DiscardDeck()
         {
-            Deck = new List<Card>();
+            Deck = new ObservableCollection<Card>();
         }
 
         // methods
@@ -20,6 +24,7 @@ namespace testCsharp.Model.Decks
         {
             // adds a card to the discard pile
             Deck.Add(card);
+            
         }
 
         public List<Card> clearDiscardPile()

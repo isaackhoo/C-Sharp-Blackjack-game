@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
+using testCsharp.Model.Decks;
 using testCsharp.Model.EventsInterface;
 
 namespace testCsharp.Model
@@ -24,7 +25,7 @@ namespace testCsharp.Model
         // ----------
         public Guid _id { get; private set; }
         public string Name { get; private set; }
-        private PlayerHand Hand { get; set; }
+        public  PlayerHand Hand { get; private set; }
         public uint TotalGamePoints { get; private set; }
 
         // publisher
@@ -44,18 +45,27 @@ namespace testCsharp.Model
             Name = name;
             Hand = new PlayerHand();
             TotalGamePoints = 0;
-
-            // subscribe to game state events
-            GameState.OnGameEnded += (sender, e) => OnGameStateEndedHandler(e);
         }
 
         // subscription handlers
         // ----------
-        private void OnGameStateEndedHandler(GameStateEventArgs e)
+        public void subscribeToGameStateEvents()
+        {
+            // subscribe to game state events
+            GameState.OnGameEnded += (sender, e) => OnGameStateEndedHandler(e);
+        }
+
+        protected void OnGameStateEndedHandler(GameStateEventArgs e)
         {
             Console.WriteLine($"Game status {e.GameStatus}");
             // game has ended, and player will emit event to have his hand points revealed
             Console.WriteLine($"{Name} revealing hand points");
+        }
+
+        // Game handlers
+        public void receiveCard(Card card)
+        {
+            Hand.addToHand(card);
         }
 
         // Game points addition
