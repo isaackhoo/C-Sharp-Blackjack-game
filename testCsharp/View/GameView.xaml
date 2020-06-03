@@ -12,7 +12,8 @@
     Title="GameView">
 
     <Grid
-        Loaded="OnPageLoaded">
+        Loaded="OnPageLoaded"
+        Background="Black">
         <Grid.ColumnDefinitions>
             <ColumnDefinition
                 Width="*" />
@@ -52,6 +53,18 @@
                     Property="Margin"
                     Value="0,5" />
             </Style>
+            <Style
+                TargetType="TextBlock">
+                <Setter
+                    Property="FontFamily"
+                    Value="{x:Static theme:Font.FontFamily}" />
+                <Setter
+                    Property="FontSize"
+                    Value="{x:Static theme:Font.Body}" />
+                <Setter 
+                    Property="Foreground"
+                    Value="{x:Static theme:Brushes.Secondary}"/>
+            </Style>
         </Grid.Resources>
 
         <!--Exit button-->
@@ -62,14 +75,48 @@
             Margin="5,5"
             Name="ExitGameButton"
             Content="Exit Game"
-            FontSize="{x:Static theme:Font.Caption}" />
+            FontSize="{x:Static theme:Font.Caption}"
+            Click="onExitButtonPress" />
 
         <!--Dealer Hand-->
-        <Label
+        <ItemsControl
             Grid.Column="1"
             Grid.Row="0"
-            Name="gameLabel"
-            FontSize="16">Game View</Label>
+            x:Name="DealerHandList"
+            ItemsSource="{Binding testHand}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border
+                        Width="100"
+                        Height="150"
+                        CornerRadius="5"
+                        BorderThickness="1"
+                        Background="{x:Static theme:Brushes.Secondary}"
+                        BorderBrush="{x:Static theme:Brushes.Primary}"
+                        Margin="5"
+                        Padding="10"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                        <StackPanel
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            <TextBlock
+                                Text="{Binding Display}" />
+                            <TextBlock
+                                Text="{Binding Suit}" />
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
         <!--Game Comments and Action Buttons-->
         <Grid
@@ -79,7 +126,7 @@
                 <ColumnDefinition
                     Width="*" />
                 <ColumnDefinition
-                    Width="2*" />
+                    Width="*" />
                 <ColumnDefinition
                     Width="*" />
             </Grid.ColumnDefinitions>
@@ -93,6 +140,31 @@
                 <RowDefinition
                     Height="*" />
             </Grid.RowDefinitions>
+            
+            <!--Discard Deck Display-->
+            <Grid
+                Grid.Column="0"
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <StackPanel
+                    Orientation="Vertical">
+                    <Border
+                        BorderThickness="1"
+                        BorderBrush="{x:Static theme:Brushes.Secondary}"
+                        CornerRadius="5"
+                        Margin="0,5">
+                        <TextBlock
+                            Text="Discard deck img" />
+                    </Border>
+
+                    <TextBlock
+                        Text="Deck count" />
+                </StackPanel>
+            </Grid>
+
+            <!--Game Comments-->
             <TextBlock
                 Grid.Row="1"
                 Grid.RowSpan="2"
@@ -103,6 +175,8 @@
                 Text="i"
                 Foreground="{x:Static theme:Brushes.Primary}"
                 FontSize="{x:Static theme:Font.Title}" />
+            
+            <!--Game action buttons-->
             <Grid
                 Name="GameControlButtonGroup"
                 Grid.Row="1"
@@ -119,19 +193,77 @@
                     Margin="0, 5"
                     Name="HitButton"
                     Content="HIT"
-                    FontSize="{x:Static theme:Font.Title}" />
+                    FontSize="{x:Static theme:Font.Title}"
+                    Click="OnHitButtonPress" />
                 <Button
                     Grid.Row="1"
                     Margin="0, 5"
                     Name="StayButton"
                     Content="STAY"
-                    FontSize="{x:Static theme:Font.Title}" />
+                    FontSize="{x:Static theme:Font.Title}"
+                    Click="OnStayButtonPress" />
+            </Grid>
+
+            <!--Active Deck Display-->
+            <Grid
+                Grid.Column="2"
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <StackPanel Orientation="Vertical">
+                    <Border
+                        BorderThickness="1"
+                        BorderBrush="{x:Static theme:Brushes.Secondary}"
+                        CornerRadius="5"
+                        Margin="0,5"
+                        >
+                        <TextBlock
+                            Text="Deck img" />
+                    </Border>
+
+                    <TextBlock Text="Deck count"/>
+                </StackPanel>
             </Grid>
         </Grid>
 
         <!--Player Hand-->
-        <ItemsControl>
-            
+        <ItemsControl
+            Grid.Column="1"
+            Grid.Row="2"
+            x:Name="PlayerHandList"
+            ItemsSource="{Binding testHand}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border
+                        Width="100"
+                        Height="150"
+                        CornerRadius="5"
+                        BorderThickness="1"
+                        BorderBrush="{x:Static theme:Brushes.Primary}"
+                        Margin="5"
+                        Padding="10"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                        <StackPanel
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            <TextBlock
+                                Text="{Binding Display}" />
+                            <TextBlock
+                                Text="{Binding Suit}" />
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
         </ItemsControl>
     </Grid>
 </Page>
