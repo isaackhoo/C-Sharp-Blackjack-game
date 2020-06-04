@@ -33,17 +33,6 @@ namespace testCsharp.View
             JoinGameButton.IsEnabled = false;
         }
 
-        //private void GoToGameView(object sender, RoutedEventArgs e)
-        //{
-        //    Console.WriteLine("Entered title view button click -  go to game view");
-        //    // get navigation services
-        //    NavigationService nav = NavigationService.GetNavigationService(this);
-        //// create game view page
-        //GameView gameView = new GameView();
-        //// navigate to game view page
-        //nav.Navigate(gameView);
-        //}
-
         private void onStartSinglePlayer(object sender, RoutedEventArgs e)
         {
             // initialize game variables

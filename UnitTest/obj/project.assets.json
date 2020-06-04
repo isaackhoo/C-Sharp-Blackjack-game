@@ -1226,14 +1226,14 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
-      "testCsharp/1.0.0": {
+      "BlackJack/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "compile": {
-          "bin/placeholder/testCsharp.dll": {}
+          "bin/placeholder/BlackJack.dll": {}
         },
         "runtime": {
-          "bin/placeholder/testCsharp.dll": {}
+          "bin/placeholder/BlackJack.dll": {}
         },
         "frameworkReferences": [
           "Microsoft.WindowsDesktop.App.WPF"
@@ -4632,18 +4632,18 @@
         "system.xml.xpath.xmldocument.nuspec"
       ]
     },
-    "testCsharp/1.0.0": {
+    "BlackJack/1.0.0": {
       "type": "project",
-      "path": "../testCsharp/testCsharp.csproj",
-      "msbuildProject": "../testCsharp/testCsharp.csproj"
+      "path": "../testCsharp/BlackJack.csproj",
+      "msbuildProject": "../testCsharp/BlackJack.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "BlackJack >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 16.4.0",
       "NUnit3TestAdapter >= 3.15.1",
-      "nunit >= 3.12.0",
-      "testCsharp >= 1.0.0"
+      "nunit >= 3.12.0"
     ]
   },
   "packageFolders": {
@@ -4672,8 +4672,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "G:\\C#\\testCsharp\\testCsharp.csproj": {
-              "projectPath": "G:\\C#\\testCsharp\\testCsharp.csproj"
+            "G:\\C#\\testCsharp\\BlackJack.csproj": {
+              "projectPath": "G:\\C#\\testCsharp\\BlackJack.csproj"
             }
           }
         }

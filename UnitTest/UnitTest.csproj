@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\testCsharp\testCsharp.csproj" />
+    <ProjectReference Include="..\testCsharp\BlackJack.csproj" />
   </ItemGroup>
 
 </Project>

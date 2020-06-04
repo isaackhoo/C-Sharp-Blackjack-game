@@ -9,14 +9,10 @@ namespace testCsharp.Model
 {
     public class PlayerHand : INotifyPropertyChanged
     {
-        private Card _firstCard;
-        public Card FirstCard { 
-            get { return _firstCard;  } 
-            private set { _firstCard = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FirstCard))); } 
-        }
-        public ObservableCollection<Card> HandWithoutFirstCard { get; private set; }
-        private int _totalPoints; 
-        public int TotalPoints {
+        public ObservableCollection<Card> Cards { get; private set; }
+        private int _totalPoints { get; set; }
+        public int TotalPoints
+        {
             get { return _totalPoints; }
             private set { _totalPoints = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TotalPoints))); }
         }
@@ -27,8 +23,7 @@ namespace testCsharp.Model
         // constructor
         public PlayerHand()
         {
-            FirstCard = null;
-            HandWithoutFirstCard = new ObservableCollection<Card>();
+            Cards = new ObservableCollection<Card>();
             TotalPoints = 0;
         }
 
@@ -39,8 +34,8 @@ namespace testCsharp.Model
             //    // self explainatory
             //    FirstCard = card;
             //else
-                // add card to player's hand
-                HandWithoutFirstCard.Add(card);
+            // add card to player's hand
+            Cards.Add(card);
 
             // calculate total points in hand
             reevaluteHandTotal();
@@ -51,13 +46,9 @@ namespace testCsharp.Model
             int NumberOfAces = 0;
             int acePointDifference = 0;
 
-            List<Card> temp = new List<Card>(HandWithoutFirstCard);
-            if (FirstCard != null)
-                temp.Add(FirstCard);
-
             // sum value of all cards. Sum alternative value of aces
             TotalPoints = 0;
-            temp.ForEach(card =>
+            foreach (Card card in Cards)
             {
                 if (card.Display != "A")
                     TotalPoints += card.Value;
@@ -68,13 +59,27 @@ namespace testCsharp.Model
                     if (acePointDifference == 0)
                         acePointDifference = card.Value - card.AlternativeValue;
                 }
-            });
+            };
             // determine if aces can take a value of 11 instead
             for (int i = 0; i < NumberOfAces; i++)
             {
                 if (Settings.BlackJackTarget - TotalPoints >= acePointDifference)
                     TotalPoints += acePointDifference;
             }
+        }
+
+        public bool hasExceeded()
+        {
+            if (TotalPoints > Settings.BlackJackTarget)
+                return true;
+            return false;
+        }
+
+        // reset
+        public void resetHand()
+        {
+            Cards.Clear();
+            TotalPoints = 0;
         }
     }
 }

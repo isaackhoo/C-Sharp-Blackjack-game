@@ -1,7 +1,7 @@
 ﻿testCsharp
 1.0.0.0
 
-exe
+winexe
 C#
 .cs
 G:\C#\testCsharp\obj\Debug\netcoreapp3.1\
@@ -16,5 +16,5 @@ G:\C#\testCsharp\App.xaml
 1921654412462
 View\GameView.xaml;View\SettingsView.xaml;View\TitleView.xaml;
 
-True
+False
 

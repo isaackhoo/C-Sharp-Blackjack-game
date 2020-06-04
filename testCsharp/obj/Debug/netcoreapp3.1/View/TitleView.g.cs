@@ -118,7 +118,7 @@ namespace testCsharp.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/testCsharp;component/view/titleview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/BlackJack;component/view/titleview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\TitleView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

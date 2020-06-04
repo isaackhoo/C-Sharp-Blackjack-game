@@ -1,37 +1,186 @@
-﻿<Page x:Class="testCsharp.View.SettingsView"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:testCsharp.View"
+﻿<Page
+    x:Class="testCsharp.View.SettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:testCsharp.View"
+    xmlns:model="clr-namespace:testCsharp.Model"
     xmlns:theme="clr-namespace:testCsharp.View.Theme"
-    mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="SettingsView">
+    mc:Ignorable="d"
+    d:DesignHeight="1080"
+    d:DesignWidth="1920"
+    Title="SettingsView">
 
-    <Grid>
+    <Grid
+        Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition
-                Height="*" />
+                Height="2*" />
             <RowDefinition
-                Height="*" />
+                Height="8*" />
             <RowDefinition
                 Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock
+        <Grid.Resources>
+            <Style
+                TargetType="Button">
+                <Setter
+                    Property="Background"
+                    Value="{x:Static theme:Brushes.Primary}" />
+                <Setter
+                    Property="Foreground"
+                    Value="{x:Static theme:Brushes.Secondary}" />
+                <Setter
+                    Property="FontFamily"
+                    Value="{x:Static theme:Font.FontFamily}" />
+                <Setter
+                    Property="FontSize"
+                    Value="{x:Static theme:Font.SubTitle}" />
+                <Setter
+                    Property="Padding"
+                    Value="10,5" />
+                <Setter
+                    Property="Margin"
+                    Value="0,5" />
+            </Style>
+            <Style
+                TargetType="TextBlock">
+                <Setter
+                    Property="FontFamily"
+                    Value="{x:Static theme:Font.FontFamily}" />
+                <Setter
+                    Property="FontSize"
+                    Value="{x:Static theme:Font.Title}" />
+                <Setter
+                    Property="Foreground"
+                    Value="{x:Static theme:Brushes.Secondary}" />
+            </Style>
+            <Style
+                TargetType="TextBox">
+                <Setter
+                    Property="FontFamily"
+                    Value="{x:Static theme:Font.FontFamily}" />
+                <Setter
+                    Property="FontSize"
+                    Value="{x:Static theme:Font.Title}" />
+                <Setter
+                    Property="Foreground"
+                    Value="{x:Static theme:Brushes.Secondary}" />
+                <Setter
+                    Property="Background"
+                    Value="Transparent" />
+                <Setter
+                    Property="BorderBrush"
+                    Value="Transparent" />
+                <Setter
+                    Property="CaretBrush"
+                    Value="{x:Static theme:Brushes.Secondary}" />
+            </Style>
+        </Grid.Resources>
+
+        <!--Page header-->
+        <Grid
             Grid.Row="0"
-            Name="SettingsTitle"
-            Text="Settings"
-            Foreground="{x:Static theme:Brushes.Primary}" />
-        <Button
-            Grid.Row="1"
-            Name="TestEventButton"
-            Content="test whatever"
-            Click="onTestButtonPress" />
-        <Button
-            Grid.Row="2"
-            Name="SettingsBackButton"
-            Content="Save and Return"
-            Click="onBackToTitle" />
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            <StackPanel
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <TextBlock
+                    Text="s"
+                    FontSize="{x:Static theme:Font.Headline}"
+                    Foreground="{x:Static theme:Brushes.Primary}" />
+                <TextBlock
+                    Text="ettings"
+                    FontSize="{x:Static theme:Font.Headline}"
+                    Foreground="{x:Static theme:Brushes.Secondary}" />
+            </StackPanel>
+        </Grid>
+
+        <!--Settings Controls-->
+        <Grid
+            Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="*" />
+                <ColumnDefinition
+                    Width="2*" />
+                <ColumnDefinition
+                    Width="*" />
+                <ColumnDefinition
+                    Width="2*" />
+                <ColumnDefinition
+                    Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!--settings name-->
+            <StackPanel
+                Grid.Column="1"
+                Orientation="Vertical"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center">
+                <TextBlock
+                    Text="Player Name"
+                    HorizontalAlignment="Right"
+                    Foreground="{x:Static theme:Brushes.Primary}"
+                    Margin="0,10" />
+                <TextBlock
+                    Text="Number of Decks"
+                    HorizontalAlignment="Right"
+                    Foreground="{x:Static theme:Brushes.Primary}"
+                    Margin="0,10" />
+                <!--<TextBlock
+                    Text="BlackJack Value"
+                    HorizontalAlignment="Right"
+                    Foreground="{x:Static theme:Brushes.Primary}"
+                    Margin="0,10" />-->
+            </StackPanel>
+
+            <!--settings value-->
+            <StackPanel
+                Grid.Column="3"
+                Orientation="Vertical"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center">
+                <TextBox
+                    Name="PlayerNameInputBox"
+                    Text="{Binding Source={x:Static model:Settings.PlayerName}, Path=.}"
+                    Margin="0, 10" 
+                    MaxLength="25"
+                    />
+                <TextBox
+                    Name="NumberOfDecksInputBox"
+                    Text="{Binding Source={x:Static model:Settings.NumberOfDecks}, Path=.}"
+                    Margin="0, 10"
+                    PreviewTextInput="NumberOfDecksInputBoxPreview" />
+                <!--<TextBox
+                    Name="BlackjackTargetInputBox"
+                    Text="{Binding Source={x:Static model:Settings.BlackJackTarget}, Path=.}"
+                    Margin="0, 10"
+                    PreviewTextInput="BlackjackTargetInputBoxPreview" />-->
+            </StackPanel>
+
+        </Grid>
+
+        <!--Exit Settings-->
+        <Grid
+            Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="*" />
+                <ColumnDefinition
+                    Width="4*" />
+                <ColumnDefinition
+                    Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="1"
+                Content="Save and Exit"
+                FontSize="{x:Static theme:Font.SubHeader}"
+                Margin="0, 20"
+                Click="OnSaveAndExit" />
+        </Grid>
     </Grid>
 </Page>

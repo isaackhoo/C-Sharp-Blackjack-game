@@ -89,7 +89,7 @@ namespace testCsharp.Model.Decks.Constants
             new Hashtable()
             {
                 {"display", "10" },
-                {"value", 1 },
+                {"value", 10 },
                 {"alternativeValue", 0 },
             },
             new Hashtable()

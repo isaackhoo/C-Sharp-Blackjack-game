@@ -10,9 +10,6 @@ namespace testCsharp.Model.Decks
     {
         public ObservableCollection<Card> Deck { get; private set; }
 
-        // notification event
-        public event PropertyChangedEventHandler PropertyChanged;
-
         // constructor
         public DiscardDeck()
         {
@@ -24,7 +21,12 @@ namespace testCsharp.Model.Decks
         {
             // adds a card to the discard pile
             Deck.Add(card);
-            
+        }
+
+        public void discardMultipleCards(List<Card> cards)
+        {
+            // observable collection doesnt have add range method. add one by one
+            cards.ForEach(card => addCard(card));
         }
 
         public List<Card> clearDiscardPile()

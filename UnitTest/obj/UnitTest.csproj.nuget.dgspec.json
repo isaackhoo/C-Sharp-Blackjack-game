@@ -4,12 +4,12 @@
     "G:\\C#\\UnitTest\\UnitTest.csproj": {}
   },
   "projects": {
-    "G:\\C#\\testCsharp\\testCsharp.csproj": {
+    "G:\\C#\\testCsharp\\BlackJack.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\C#\\testCsharp\\testCsharp.csproj",
-        "projectName": "testCsharp",
-        "projectPath": "G:\\C#\\testCsharp\\testCsharp.csproj",
+        "projectUniqueName": "G:\\C#\\testCsharp\\BlackJack.csproj",
+        "projectName": "BlackJack",
+        "projectPath": "G:\\C#\\testCsharp\\BlackJack.csproj",
         "packagesPath": "C:\\Users\\isaac\\.nuget\\packages\\",
         "outputPath": "G:\\C#\\testCsharp\\obj\\",
         "projectStyle": "PackageReference",
@@ -88,8 +88,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "G:\\C#\\testCsharp\\testCsharp.csproj": {
-                "projectPath": "G:\\C#\\testCsharp\\testCsharp.csproj"
+              "G:\\C#\\testCsharp\\BlackJack.csproj": {
+                "projectPath": "G:\\C#\\testCsharp\\BlackJack.csproj"
               }
             }
           }

@@ -78,14 +78,6 @@ namespace testCsharp.Model.Decks
         {
             return Deck.Count;
         }
-
-        //public void displayAllCards()
-        //{
-        //    Deck.ForEach(card =>
-        //    {
-        //        Console.WriteLine($"{card._id} - {card.getId()}");
-        //    });
-        //}
     }
 }
 

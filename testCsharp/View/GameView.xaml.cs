@@ -32,33 +32,30 @@ namespace testCsharp.View
             // hides the back and forward button provided by default
             ShowsNavigationUI = false;
 
-            // hide UI
-            //HitButton.Visibility = Visibility.Hidden;
-            //StayButton.Visibility = Visibility.Hidden;
-
-            GameTextFeedback.Text = "illumina blackjack";
-            GameTextFeedback.Visibility = Visibility.Hidden;
-
             // create a player object
-            player = new Player("player 1");
+            player = new Player(Settings.PlayerName);
 
             // add player to game state
             GameState.addPlayer(player);
 
-            // bind hand from game state
-            OverLayVisibleDealerHandList.ItemsSource = GameState.TableDealer.Hand.HandWithoutFirstCard;
-            UnderLayCoveredDealerHandList.ItemsSource = GameState.TableDealer.Hand.HandWithoutFirstCard;
-            RevealedPlayerHandList.ItemsSource = player.Hand.HandWithoutFirstCard;
+            // bind players hands from game state
+            OverLayVisibleDealerHandList.ItemsSource = GameState.TableDealer.Hand.Cards;
+            UnderLayCoveredDealerHandList.ItemsSource = GameState.TableDealer.Hand.Cards;
+            RevealedPlayerHandList.ItemsSource = player.Hand.Cards;
 
+            // bind dealers feedback
+            DealersHandScoreTextBlock.DataContext = GameState.TableDealer;
+
+            // bind players feedback
             PlayerHandScoreTextBlock.DataContext = player;
-
-            // test
+            PlayerTotalGameScoreTextBlock.DataContext = player;
+            PlayerGameWinLoseStatus.DataContext = player;
         }
 
         private void OnPageLoaded(object sender, RoutedEventArgs e)
         {
             // start the game
-            GameState.startGame();
+            GameState.startNewGame();
         }
 
         private void onExitButtonPress(object sender, RoutedEventArgs e)
@@ -79,6 +76,12 @@ namespace testCsharp.View
         private void OnStayButtonPress(object sender, RoutedEventArgs e)
         {
             // GameState.endGame();
+            GameState.stayForCurrentPlayer();
+        }
+
+        private void OnNextGameButtonPress(object sender, RoutedEventArgs e)
+        {
+            GameState.startNextGame();
         }
     }
 }

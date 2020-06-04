@@ -1,33 +1,33 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using testCsharp.Model.Decks;
 
 namespace testCsharp.Model.EventsInterface
 {
     public class PlayerEventArgs : EventArgs
     {
-        public string PlayerName { get; set; }
-        public uint? HandPoints { get; set; }
+        public Guid Uuid { get; set; }
+        public List<Card> Cards { get; private set; }
 
-        public PlayerEventArgs(string playerName, uint handPoints)
+        public PlayerEventArgs(Guid uuid, List<Card> cards)
         {
-            PlayerName = playerName;
-            HandPoints = handPoints;
+            Uuid = uuid;
+            Cards = new List<Card>(cards);
         }
-        public PlayerEventArgs(string playerName)
+        public PlayerEventArgs(Guid uuid)
         {
-            PlayerName = playerName;
-            HandPoints = null;
+            Uuid = uuid;
+            Cards = null;
         }
     }
 
     public interface IEventsPlayer
     {
-        event EventHandler<PlayerEventArgs> OnPlayerWin;
         event EventHandler<PlayerEventArgs> OnPlayerLose;
-        event EventHandler<PlayerEventArgs> OnPlayerHit;
+        event EventHandler<PlayerEventArgs> OnPlayerNextTurn;
         event EventHandler<PlayerEventArgs> OnPlayerStay;
-
-        event EventHandler<PlayerEventArgs> OnPlayerRevealHandPoints;
+        event EventHandler<PlayerEventArgs> OnPlayerDiscardHand;
     }
 }
